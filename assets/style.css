@@ -9,3 +9,7 @@ padding: 30px;
 form{
 text-align:center;
 }
+
+.left-margin {
+    margin-left: 3rem;
+}

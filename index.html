@@ -17,19 +17,36 @@
       <img src="https://www.cbr.com/marvel-important-stories-decade/" />
 
       <form id="form">
-          <!-- updated form id to search to test the youtube api -->
-        <input type="search" id="search" name="q" placeholder="Search..." />
+        <!-- updated form id to search to test the youtube api -->
+        <input type="search" id="query" name="q" placeholder="Search..." />
         <button>Search</button>
       </form>
       <!-- youTube search results -->
       <div id="results"></div>
+
+
+      <!-- START youtube API test -->
+      <div class="left-margin">
+      <h2>youTube API test</h2>
+      <p>YouTube API format</p>
+      <code> https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=YOURKEYWORD&type=video&key=YOURAPIKEY</code>
+      <p>search for spiderman</p>
+      <a href="https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=spider-man&type=video&key=AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0" target="_blank">spider man api results</a>
+      <p>the video can be accessed via "videoId"</p>
+      <p>create the url for a video by concatenating "https://www.youtube.com/watch?v=" +  "videoID"</p>
+      <a href="https://www.youtube.com/watch?v=nV9DWbWZkF0" target="_blank">e.g. link to video</a>
+    </div>
+      <!-- END - youtube API test -->
+
+
     </main>
     <!-- Materialise - Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Added link to the jQuery library -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- youTube (i.e. google) js api -->
-    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+    <!-- TODO: remove from here -->
+    <script src="https://apis.google.com/js/client.js"></script>
 
     <script type="text/javascript" src="./assets/script.js"></script>
   </body>
