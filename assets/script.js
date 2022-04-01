@@ -50,6 +50,7 @@ var displayHero = function (foundHero) {
   }
   marvelHeroEl.textContent = "Showing results for " + foundHero;
   //call youTube API here using foundHero
+  console.log("foundHero", foundHero);
 };
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
