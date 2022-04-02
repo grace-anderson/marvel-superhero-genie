@@ -1,6 +1,8 @@
+
 var searchFormEl = document.querySelector("#search-form");
 var queryEl = document.querySelector("#query-name");
 var marvelHeroEl = document.querySelector("#marvel-hero-body");
+
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -44,6 +46,7 @@ var getHeroRepos = function (hero) {
 };
 
 var displayHero = function (foundHero) {
+
   if (foundHero.length === 0) {
     marvelHeroEl.textContent = "No hero found";
     return;
@@ -53,3 +56,4 @@ var displayHero = function (foundHero) {
 };
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
+
