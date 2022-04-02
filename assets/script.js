@@ -1,9 +1,11 @@
+
 var searchFormEl = document.querySelector("#search-form");
 var queryEl = document.querySelector("#query-name");
 var marvelHeroEl = document.querySelector("#marvel-hero-body");
 //youTube API variables
 const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
 const youTubeMaxResults = "1";
+
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -47,17 +49,19 @@ var getHeroRepos = function (hero) {
 };
 
 var displayHero = function (foundHero) {
+
   if (foundHero.length === 0) {
     marvelHeroEl.textContent = "No hero found";
     return;
   }
   marvelHeroEl.textContent = "Showing results for " + foundHero;
-  //call youTube search API here using foundHero
-  console.log("foundHero", foundHero);
+
+  //call youTube search API 
   getYouTubeVideo(foundHero);
+  console.log("foundHero", foundHero);
 };
 
-//search for youTube videos with hero search term, return one video
+//search for youTube video data using hero search term, return data for one video
 var getYouTubeVideo = function (foundHero) {
   var videoHero = foundHero;
   console.log("videoHero", videoHero);
@@ -70,23 +74,43 @@ var getYouTubeVideo = function (foundHero) {
     "&type=video&key=" +
     youTubeApiKey;
 
-  // calling the youTube API to search for 1 video with search word "videoHero"
+  // calling the youTube API to search for one video with search word "videoHero"
   fetch(videoRequestUrl).then(function (response) {
     response.json().then(function (data) {
       var videoHeroSearch = data;
       console.log("videoHeroSearch - data", videoHeroSearch);
 
-      // if (heroSearch) {
-      //   var foundHero = heroSearch.name;
-      //   console.log(
-      //     "the variable for the hero name " + foundHero + " is foundHero"
-      //   );
-      //   displayHero(foundHero);
-      // } else if (heroSearch === undefined) {
-      //   marvelHeroEl.textContent = "Sorry no heroes found";
-      // }
+      if (videoHeroSearch) {
+        var heroVideoId = data.items.id.videoId;
+        console.log("hero's video id", heroVideoId);
+        //pass heroVideoID to video url and display video
+        displayHeroVideo(heroVideoId);
+      } else if (videoHeroSearch === undefined) {
+        marvelHeroEl.textContent = "Sorry no hero video found";
+      }
     });
   });
 };
 
+//create the hero video url
+var createHeroVideoUrl = function (heroVideoID) {
+  var heroVideoUrl = "https://www.youtube.com/watch?v=" + heroVideoID;
+  console.log("video link for hero video: ", heroVideoUrl)
+  return heroVideoUrl
+};
+
+//display the hero video
+var displayHeroVideo = function (heroVideoId) {
+  if (heroVideoId.length === 0) {
+    marvelHeroEl.textContent = "No video found";
+    return;
+  }
+  //create url for hero video
+  var heroVideoUrl = "https://www.youtube.com/watch?v=" + heroVideoId;
+  console.log("video link for hero video: ", heroVideoUrl)
+  marvelHeroEl.textContent = "Showing video for " + foundHero;
+};
+
+
 searchFormEl.addEventListener("submit", formSubmitHandler);
+
