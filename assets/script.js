@@ -5,6 +5,14 @@ var marvelHeroEl = document.querySelector("#marvel-hero-body");
 //youTube API variables
 const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
 const youTubeMaxResults = "1";
+//marvel variables
+var marvelKey = "01f7cfc9bdb8d6b74631203dbb7e8ccc";
+var marvelOtherKey = "110fcff0e74b0a6ff3a9454850fa2118911a64b1";
+var ts = new Date().getTime();
+var hash = ts + marvelOtherKey + marvelKey;
+var passhash = md5(hash).toString();
+
+
 
 
 var formSubmitHandler = function (event) {
@@ -14,7 +22,7 @@ var formSubmitHandler = function (event) {
     console.log(heroName);
 
     if (heroName) {
-        console.log("hi");
+        console.log("hero has been found");
         getHeroRepos(heroName);
         //Enter Classes for this element
         marvelHeroEl.classList = "";
@@ -24,16 +32,8 @@ var formSubmitHandler = function (event) {
 };
 
 
-
-var marvelKey = "01f7cfc9bdb8d6b74631203dbb7e8ccc";
-var marvelOtherKey = "110fcff0e74b0a6ff3a9454850fa2118911a64b1";
-var ts = new Date().getTime();
-var hash = ts + marvelOtherKey + marvelKey;
-var passhash = md5(hash).toString();
-console.log(passhash);
-
-
 var getHeroRepos = function (hero) {
+    console.log(passhash);
     var requestUrl =
         "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" +
         hero + "&apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc" + "&ts=" + ts + "&hash=" + passhash +
