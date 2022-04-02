@@ -28,7 +28,7 @@ var formSubmitHandler = function (event) {
 var marvelKey = "01f7cfc9bdb8d6b74631203dbb7e8ccc";
 var marvelOtherKey = "110fcff0e74b0a6ff3a9454850fa2118911a64b1";
 var ts = new Date().getTime();
-var hash = ts + marvelKey + marvelOtherKey;
+var hash = ts + marvelOtherKey + marvelKey;
 var passhash = md5(hash).toString();
 console.log(passhash);
 
@@ -36,8 +36,8 @@ console.log(passhash);
 var getHeroRepos = function (hero) {
     var requestUrl =
         "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" +
-        hero + "&ts=" + ts + "&hash=" + passhash +
-        "&limit=1&apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc";
+        hero + "&apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc" + "&ts=" + ts + "&hash=" + passhash +
+        "&limit=1";
 
 
     console.log(requestUrl)
