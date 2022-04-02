@@ -13,8 +13,6 @@ var hash = ts + marvelOtherKey + marvelKey;
 var passhash = md5(hash).toString();
 
 
-
-
 var formSubmitHandler = function (event) {
     event.preventDefault();
 
@@ -107,14 +105,28 @@ var getYouTubeVideo = function (foundHero) {
 //display the hero video
 var displayHeroVideo = function (heroVideoId) {
     if (heroVideoId.length === 0) {
-        marvelHeroEl.textContent = "No video found";
-        return;
+      marvelHeroEl.textContent = "No video found";
+      return;
     }
     //create url for hero video
-    var heroVideoUrl = "https://www.youtube.com/watch?v=" + heroVideoId;
+    //   var heroVideoUrl = "https://www.youtube.com/watch?v=" + heroVideoId;
+    var heroVideoUrl = "https://www.youtube.com/embed/" + heroVideoId;
     console.log("video link for hero video: ", heroVideoUrl);
-};
-
+  
+    //append elements to display video
+    var videoContainerEl = document.createElement("div");
+    videoContainerEl.classList.add("video-container");
+  
+    var videoFrameEl = document.createElement("iframe");
+    videoFrameEl.width = "853";
+    videoFrameEl.height = "480";
+    videoFrameEl.src = heroVideoUrl;
+    videoFrameEl.frameborder = "0";
+    videoFrameEl.allowfullscreen;
+  
+    videoContainerEl.appendChild(videoFrameEl);
+    marvelHeroEl.appendChild(videoContainerEl);
+  };
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
 
