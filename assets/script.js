@@ -1,5 +1,10 @@
-var searchFormEl = document.querySelector('#search-form');
-var queryEl = document.querySelector('#query-name');
+
+
+// TODO-YouTube API fetch using search team
+const youtubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
+
+var searchFormEl = document.querySelector('#form');
+var queryEl = document.querySelector('#query');
 var marvelHeroEl = document.querySelector('#marvel-hero-body');
 
 
@@ -57,3 +62,4 @@ var displayHero = function (foundHero) {
 
 }
 searchFormEl.addEventListener('submit', formSubmitHandler);
+
