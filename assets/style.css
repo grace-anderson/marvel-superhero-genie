@@ -1,25 +1,12 @@
 /* materialise h1 format*/
 h1{
-/* font-family:'Times New Roman'; */
-/* font-size: 18px; */
-/* color: red; */
 text-align:center;
-/* padding: 30px; */
 } 
 
 form{
 text-align:center;
 }
 
-img#marvel-hero-montage-image{
-    width: 100%;
-    height: auto;
-}
-
-
-.left-margin {
-    margin-left: 3rem;
-}
 
 /* .main-body{
     background-image: url("https://static2.cbrimages.com/wordpress/wp-content/uploads/2019/11/Marvel-Univere-Header-Image-Cropped.jpg?");
