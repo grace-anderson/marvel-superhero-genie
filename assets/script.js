@@ -93,7 +93,7 @@ var getYouTubeVideo = function (foundHero) {
             console.log("videoHeroSearch - data", videoHeroSearch);
 
             if (videoHeroSearch) {
-                var heroVideoId = data.items.id.videoId;
+                var heroVideoId = data.items[0].id.videoId;
                 console.log("hero's video id", heroVideoId);
                 //pass heroVideoID to video url and display video
                 displayHeroVideo(heroVideoId);
@@ -104,13 +104,6 @@ var getYouTubeVideo = function (foundHero) {
     });
 };
 
-//create the hero video url
-var createHeroVideoUrl = function (heroVideoID) {
-    var heroVideoUrl = "https://www.youtube.com/watch?v=" + heroVideoID;
-    console.log("video link for hero video: ", heroVideoUrl)
-    return heroVideoUrl
-};
-
 //display the hero video
 var displayHeroVideo = function (heroVideoId) {
     if (heroVideoId.length === 0) {
@@ -119,8 +112,7 @@ var displayHeroVideo = function (heroVideoId) {
     }
     //create url for hero video
     var heroVideoUrl = "https://www.youtube.com/watch?v=" + heroVideoId;
-    console.log("video link for hero video: ", heroVideoUrl)
-    marvelHeroEl.textContent = "Showing video for " + foundHero;
+    console.log("video link for hero video: ", heroVideoUrl);
 };
 
 
