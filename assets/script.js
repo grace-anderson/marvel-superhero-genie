@@ -54,6 +54,7 @@ var getHeroRepos = function (hero) {
         displayHero(foundHero);
       } else if (heroSearch === undefined) {
         marvelHeroEl.textContent = "Sorry no heroes found";
+        noResultsModal(".modal-wrapper", ".modal-content", true);
       }
     });
   });
@@ -62,6 +63,7 @@ var getHeroRepos = function (hero) {
 var displayHero = function (foundHero) {
   if (foundHero.length === 0) {
     marvelHeroEl.textContent = "No hero found";
+    noResultsModal(".modal-wrapper", ".modal-content", true);
     return;
   }
   marvelHeroEl.textContent = "Showing results for " + foundHero;
@@ -98,6 +100,7 @@ var getYouTubeVideo = function (foundHero) {
         displayHeroVideo(heroVideoId);
       } else if (videoHeroSearch === undefined) {
         marvelHeroEl.textContent = "Sorry no hero video found";
+        noResultsModal(".modal-wrapper", ".modal-content", true);
       }
     });
   });
@@ -128,5 +131,41 @@ var displayHeroVideo = function (heroVideoId) {
   videoContainerEl.appendChild(videoFrameEl);
   marvelHeroEl.appendChild(videoContainerEl);
 };
+
+// MODAL
+function noResultsModal(
+  modalWrapperSelector,
+  modalContentSelector,
+  closeModal = false
+) {
+  //select the elements
+  const modalWrapperElement = document.querySelector(modalWrapperSelector);
+  const modalContentElement = document.querySelector(modalContentSelector);
+
+  // style the modal elements
+  modalWrapperElement.classList.add("modal-wrapper");
+  modalContentElement.classList.add("modal-content");
+
+  //update modal to display
+  modalWrapperElement.style.display = "block";
+
+  //add X button to close modal
+  if (closeModal) {
+    modalContentElement.innerHTML += "<span class='close-modal'>&times;</span>";
+
+    const closeModalBtn = modalContentElement.querySelector(".close-modal");
+
+    closeModalBtn.addEventListener("click", () => {
+      modalWrapperElement.style.display = "none";
+    });
+  }
+
+  //close modal if click outside of the modal
+  modalWrapperElement.addEventListener("click", (event) => {
+    if (event.target === modalWrapperElement) {
+      modalWrapperElement.style.display = "none";
+    }
+  });
+}
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
