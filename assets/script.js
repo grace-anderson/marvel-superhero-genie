@@ -105,11 +105,11 @@ var displayHeroBio = function (heroID) {
     fetch(requestUrl).then(function (response) {
         response.json().then(function (data) {
             console.log("get bio call", data);
-            var heroDescription = data.data.results[0];
-            var heroImage = heroDescription.thumbnail.path;
+            var heroDescription = data.data.results[0].description;
+            var heroImagePath = heroDescription.thumbnail.path;
             var heroExtension = heroDescription.thumbnail.extension;
-            console.log(heroDescription.description);
-            console.log(heroImage + "." + heroExtension);
+            var heroImageLink = heroImagePath + "." + heroExtension
+            console.log(heroImageLink);
 
 
         });
