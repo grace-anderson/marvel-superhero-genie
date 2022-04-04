@@ -79,7 +79,7 @@ var displayHero = function (foundHero, heroID) {
   }
   marvelHeroEl.textContent = "Showing results for " + foundHero;
 
-  displayHeroBio(heroID);
+  // displayHeroBio(heroID);
   //call youTube search API
   getYouTubeVideo(foundHero);
   console.log("foundHero", foundHero);
@@ -128,6 +128,7 @@ var getYouTubeVideo = function (foundHero) {
 var displayHeroVideo = function (heroVideoId) {
   if (heroVideoId.length === 0) {
     marvelHeroEl.textContent = "No video found";
+    noResultsModal(".modal-wrapper", ".modal-content", true);
     return;
   }
   //create url for hero video
