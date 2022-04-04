@@ -6,7 +6,7 @@ var marvelHeroEl = document.querySelector("#marvel-hero-body");
 var marvelBioEl = document.querySelector("#marvel-bio-body");
 var marvelImageEl = document.querySelector("#marvel-image-body");
 var youtubeBodyEl = document.querySelector("#youtube-body");
-
+var descriptionEl = document.querySelector("#description");
 //youTube API variables
 const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
 const youTubeMaxResults = "1";
@@ -21,7 +21,7 @@ var passhash = md5(hash).toString();
 var formSubmitHandler = function (event) {
   event.preventDefault();
   marvelImageEl.innerHTML = ""
-  youtubeBodyEl.innerHTMl = ""
+
 
   var heroName = queryEl.value.trim();
   console.log(heroName);
@@ -88,6 +88,8 @@ var displayHero = function (foundHero, heroID) {
 
   marvelHeroEl.textContent = foundHero;
 
+  descriptionEl.style.display = "block";
+
   displayHeroBio(heroID, foundHero);
   //call youTube search API
   getYouTubeVideo(foundHero);
@@ -133,7 +135,7 @@ var displayHeroBio = function (heroID, foundHero) {
 
 
       marvelImageEl.innerHTML +=
-        '<img src="' + heroImageLink + '" alt=" ' + foundHero + '" style="width:200px;"><br/>'
+        '<img src="' + heroImageLink + '" alt=" ' + foundHero + '" style="width:220px;"><br/>'
     });
   });
 
