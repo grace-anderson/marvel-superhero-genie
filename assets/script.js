@@ -178,8 +178,10 @@ var getYouTubeVideo = function (foundHero) {
         //pass heroVideoID to video url and display video
         displayHeroVideo(heroVideoId);
       } else {
-        marvelHeroEl.textContent = "Sorry no hero video found";
+        youtubeBodyEl.innerHTML = ""
+        youtubeBodyEl.textContent = "Sorry no hero video found";
         noResultsModal(".modal-wrapper", ".modal-content", true);
+
       }
     });
   });
