@@ -1,7 +1,11 @@
 var searchFormEl = document.querySelector("#search-form");
 var queryEl = document.querySelector("#query-name");
 var marvelHeroEl = document.querySelector("#marvel-hero-body");
-var searchButton = document.querySelector("#search-button");
+
+var marvelBioEl = document.querySelector("#marvel-bio-body");
+var marvelImageEl = document.querySelector("#marvel-image-body");
+var youtubeBodyEl = document.querySelector("#youtube-body");
+
 //youTube API variables
 const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
 const youTubeMaxResults = "1";
@@ -12,67 +16,77 @@ var ts = new Date().getTime();
 var hash = ts + marvelOtherKey + marvelKey;
 var passhash = md5(hash).toString();
 
+//function after submit is hit
 var formSubmitHandler = function (event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  var heroName = queryEl.value.trim();
-  console.log(heroName);
+    var heroName = queryEl.value.trim();
+    console.log(heroName);
 
-  if (heroName) {
-    console.log("hero has been found");
-    getHeroRepos(heroName);
-    //Enter Classes for this element
-    marvelHeroEl.classList = "";
-  } else {
-    marvelHeroEl.textContent = "Please enter a name or letter";
-  }
+    if (heroName) {
+        console.log("hero has been found");
+        getHeroRepos(heroName);
+        //Enter Classes for this element
+        marvelHeroEl.classList = "";
+    } else {
+        marvelHeroEl.textContent = "Please enter a name or letter";
+    }
 };
 
+//api search for hero based on query input
 var getHeroRepos = function (hero) {
-  console.log(passhash);
-  var requestUrl =
-    "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" +
-    hero +
-    "&apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc" +
-    "&ts=" +
-    ts +
-    "&hash=" +
-    passhash +
-    "&limit=1";
+    console.log(passhash);
+    var requestUrl =
+        "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" +
+        hero +
+        "&apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc" +
+        "&ts=" +
+        ts +
+        "&hash=" +
+        passhash +
+        "&limit=1";
 
-  console.log(requestUrl);
-  // calling the API that searches for the hero starting with the letter entered
-  fetch(requestUrl).then(function (response) {
-    response.json().then(function (data) {
-      var heroSearch = data.data.results[0];
-      console.log(heroSearch);
+    console.log(requestUrl);
+    // calling the API that searches for the hero starting with the letter entered
+    fetch(requestUrl).then(function (response) {
+        response.json().then(function (data) {
+            console.log(data);
+            var heroSearch = data.data.results[0];
+            console.log(heroSearch);
 
-      if (heroSearch) {
-        var foundHero = heroSearch.name;
-        console.log(
-          "the variable for the hero name " + foundHero + " is foundHero"
-        );
-        displayHero(foundHero);
-      } else if (heroSearch === undefined) {
-        marvelHeroEl.textContent = "Sorry no heroes found";
-        noResultsModal(".modal-wrapper", ".modal-content", true);
-      }
+            if (heroSearch) {
+                var foundHero = heroSearch.name;
+                var heroID = heroSearch.id
+                console.log(
+                    "the variable for the hero name " + foundHero + " is foundHero"
+                );
+                console.log(heroID);
+                displayHero(foundHero, heroID);
+
+
+            } else if (heroSearch === undefined) {
+                marvelHeroEl.textContent = "Sorry no heroes found";
+                noResultsModal(".modal-wrapper", ".modal-content", true);
+            }
+        });
     });
-  });
+};
+//if hero is found
+var displayHero = function (foundHero, heroID) {
+    console.log("passed display hero function and ID is " + heroID)
+    if (foundHero.length === 0) {
+        marvelHeroEl.textContent = "No hero found";
+        noResultsModal(".modal-wrapper", ".modal-content", true);
+        return;
+    }
+    marvelHeroEl.textContent = "Showing results for " + foundHero;
+
+    displayHeroBio(heroID);
+    //call youTube search API
+    getYouTubeVideo(foundHero);
+    console.log("foundHero", foundHero);
 };
 
-var displayHero = function (foundHero) {
-  if (foundHero.length === 0) {
-    marvelHeroEl.textContent = "No hero found";
-    noResultsModal(".modal-wrapper", ".modal-content", true);
-    return;
-  }
-  marvelHeroEl.textContent = "Showing results for " + foundHero;
-
-  //call youTube search API
-  getYouTubeVideo(foundHero);
-  console.log("foundHero", foundHero);
-};
 
 //search for youTube Marvel channel videos using hero search term, return data for one video
 var getYouTubeVideo = function (foundHero) {
@@ -109,12 +123,13 @@ var getYouTubeVideo = function (foundHero) {
         marvelHeroEl.textContent = "Sorry no hero video found";
         noResultsModal(".modal-wrapper", ".modal-content", true);
       }
+
     });
-  });
 };
 
 //display the hero video
 var displayHeroVideo = function (heroVideoId) {
+
   if (heroVideoId.length === 0) {
     marvelHeroEl.textContent = "No video found";
     return;
@@ -136,42 +151,43 @@ var displayHeroVideo = function (heroVideoId) {
 
   videoContainerEl.appendChild(videoFrameEl);
   marvelHeroEl.appendChild(videoContainerEl);
+
 };
 
 // MODAL
 function noResultsModal(
-  modalWrapperSelector,
-  modalContentSelector,
-  closeModal = false
+    modalWrapperSelector,
+    modalContentSelector,
+    closeModal = false
 ) {
-  //select the elements
-  const modalWrapperElement = document.querySelector(modalWrapperSelector);
-  const modalContentElement = document.querySelector(modalContentSelector);
+    //select the elements
+    const modalWrapperElement = document.querySelector(modalWrapperSelector);
+    const modalContentElement = document.querySelector(modalContentSelector);
 
-  // style the modal elements
-  modalWrapperElement.classList.add("modal-wrapper");
-  modalContentElement.classList.add("modal-content");
+    // style the modal elements
+    modalWrapperElement.classList.add("modal-wrapper");
+    modalContentElement.classList.add("modal-content");
 
-  //update modal to display
-  modalWrapperElement.style.display = "block";
+    //update modal to display
+    modalWrapperElement.style.display = "block";
 
-  //add X button to close modal
-  if (closeModal) {
-    modalContentElement.innerHTML += "<span class='close-modal'>&times;</span>";
+    //add X button to close modal
+    if (closeModal) {
+        modalContentElement.innerHTML += "<span class='close-modal'>&times;</span>";
 
-    const closeModalBtn = modalContentElement.querySelector(".close-modal");
+        const closeModalBtn = modalContentElement.querySelector(".close-modal");
 
-    closeModalBtn.addEventListener("click", () => {
-      modalWrapperElement.style.display = "none";
-    });
-  }
-
-  //close modal if click outside of the modal
-  modalWrapperElement.addEventListener("click", (event) => {
-    if (event.target === modalWrapperElement) {
-      modalWrapperElement.style.display = "none";
+        closeModalBtn.addEventListener("click", () => {
+            modalWrapperElement.style.display = "none";
+        });
     }
-  });
+
+    //close modal if click outside of the modal
+    modalWrapperElement.addEventListener("click", (event) => {
+        if (event.target === modalWrapperElement) {
+            modalWrapperElement.style.display = "none";
+        }
+    });
 }
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
