@@ -1,97 +1,85 @@
 <!DOCTYPE html>
 
 <html lang="en-US">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Marvel Superhero Genie</title>
     <!-- Materialise - Compiled and minified CSS -->
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <link rel="stylesheet" type="text/css" href="./assets/style.css" />
     <script src="./assets/md5.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h1 class="red-text text-darken-2">Marvel Superhero Genie</h1>
-        </div>
-      </div>
-      <form id="search-form">
         <div class="row">
-          <div class="col s12">
-            <input
-              type="search"
-              id="query-name"
-              class="autocomplete"
-              name="q"
-              placeholder="Search..."
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            <button
-              class="btn waves-effect waves-light teal darken-1 btn-large"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <div class="row">
-        <div class="col s12">
-          <div id="marvel-hero-body"></div>
-        </div>
-      </div>
-
-      <!--  MODAL (default display:none) -->
-          <div class="modal-wrapper">
-            <div class="modal-content">
-              <center>
-                <h3>Sorry, no heroes match your search</h3>
-                <h4>Try again ...</h4>
-                <iframe
-                  src="https://giphy.com/embed/g7GKcSzwQfugw"
-                  width="240"
-                  height="203"
-                  frameborder="0"
-                  class="giphy-embed"
-                  allowfullscreen
-                ></iframe>
-                <p>
-                  <a href="https://giphy.com/gifs/rick-roll-g7GKcSzwQfugw"></a>
-                </p>
-              </center>
+            <div class="col s12">
+                <h1 class="red-text text-darken-2">Marvel Superhero Genie</h1>
             </div>
-          </div>
-      <!-- END MODAL -->
-
-      <div class="row">
-        <div class="col s12">
-          <img
-            class="responsive-img"
-            id="marvel-hero-montage-image"
-            src="https://static2.cbrimages.com/wordpress/wp-content/uploads/2019/11/Marvel-Univere-Header-Image-Cropped.jpg"
-            alt="Marvel hero montage"
-          />
         </div>
-      </div>
+        <form id="search-form">
+            <div class="row">
+                <div class="col s12">
+                    <input type="search" id="query-name" class="autocomplete" name="q" placeholder="Search..." />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light teal darken-1 btn-large">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="card col s12">
+                <div class="card">
+                    <div class="card" id="marvel-hero-body">Name</div>
+                    <div class="card">Bio</div>
+                </div>
+                <div class="card">Image</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div id="youtube-body"></div>
+            </div>
+        </div>
+
+        <!--  MODAL (default display:none) -->
+        <div class="modal-wrapper">
+            <div class="modal-content">
+                <center>
+                    <h3>Sorry, no heroes match your search</h3>
+                    <h4>Try again ...</h4>
+                    <iframe src="https://giphy.com/embed/g7GKcSzwQfugw" width="240" height="203" frameborder="0"
+                        class="giphy-embed" allowfullscreen></iframe>
+                    <p>
+                        <a href="https://giphy.com/gifs/rick-roll-g7GKcSzwQfugw"></a>
+                    </p>
+                </center>
+            </div>
+        </div>
+        <!-- END MODAL -->
+
+        <div class="row">
+            <div class="col s12">
+                <img class="responsive-img" id="marvel-hero-montage-image"
+                    src="https://static2.cbrimages.com/wordpress/wp-content/uploads/2019/11/Marvel-Univere-Header-Image-Cropped.jpg"
+                    alt="Marvel hero montage" />
+            </div>
+        </div>
     </div>
 
     <!-- Added link to the jQuery library -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- Materialise - Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -99,5 +87,6 @@
     <script src="./assets/jquery.js"></script>
 
     <script type="text/javascript" src="./assets/script.js"></script>
-  </body>
+</body>
+
 </html>
