@@ -26,6 +26,10 @@ var formSubmitHandler = function (event) {
   var heroName = queryEl.value.trim();
   console.log(heroName);
 
+
+  queryEl.value = ""
+
+
   if (heroName) {
     console.log("hero has been found");
     getHeroRepos(heroName);
