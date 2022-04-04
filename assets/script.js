@@ -1,6 +1,8 @@
 var searchFormEl = document.querySelector("#search-form");
 var queryEl = document.querySelector("#query-name");
 var marvelHeroEl = document.querySelector("#marvel-hero-body");
+var marvelBioEl = document.querySelector("#marvel-bio-body");
+var marvelImageEl = document.querySelector("#marvel-image-body");
 var youtubeBodyEl = document.querySelector("#youtube-body");
 //youTube API variables
 const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
@@ -106,16 +108,33 @@ var displayHeroBio = function (heroID) {
         response.json().then(function (data) {
             console.log("get bio call", data);
             var heroDescription = data.data.results[0].description;
-            var heroImagePath = heroDescription.thumbnail.path;
-            var heroExtension = heroDescription.thumbnail.extension;
-            var heroImageLink = heroImagePath + "." + heroExtension
+            var heroImageLink = heroDescription.thumbnail.path + "." + heroDescription.thumbnail.extension
             console.log(heroImageLink);
 
+            if (foundHero.length === 0) {
+                marvelHeroEl.textContent = "No hero found";
+                noResultsModal(".modal-wrapper", ".modal-content", true);
+                return;
+            }
+            marvelHeroEl.textContent = "Showing results for " + foundHero;
 
+
+
+            if (heroDescription.length === 0) {
+                var heroVideoId = data.items[0].id.videoId;
+                console.log("hero's video id", heroVideoId);
+                //pass heroVideoID to video url and display video
+                displayHeroVideo(heroVideoId);
+            } else if (videoHeroSearch === undefined) {
+                marvelHeroEl.textContent = "Sorry no hero video found";
+                noResultsModal(".modal-wrapper", ".modal-content", true);
+            }
         });
-
     });
-};
+
+});
+
+
 //search for youTube video data using hero search term, return data for one video
 var getYouTubeVideo = function (foundHero) {
     var videoHero = foundHero;
