@@ -8,7 +8,12 @@ var marvelImageEl = document.querySelector("#marvel-image-body");
 var youtubeBodyEl = document.querySelector("#youtube-body");
 var descriptionEl = document.querySelector("#description");
 //youTube API variables
-const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
+//Youtube API from Helen 
+// const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
+
+//Youtube API from Jess 
+const youTubeApiKey = "AIzaSyAcJwcGGZME6Gs--ct2mRB_KSOJ1gQmI-g";
+
 const youTubeMaxResults = "1";
 //marvel variables
 var marvelKey = "01f7cfc9bdb8d6b74631203dbb7e8ccc";
