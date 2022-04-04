@@ -79,16 +79,20 @@ var getYouTubeVideo = function (foundHero) {
   var videoHero = foundHero;
   console.log("videoHero", videoHero);
 
-  //***ORIGINAL*** UPDATE URL TO INCLUDE MARVEL CHANNEL
+  //MARVEL - UPDATED URL TO INCLUDE MARVEL CHANNEL AND UPLOAD VIDEO PLAYLIST
+  //Marvel call - updated url to include Marvel channel's upload video playlist
+  //this is supposed to ensure that only marvel videos are selected by the search
+
   var videoRequestUrl =
-    "https://www.googleapis.com/youtube/v3/search?key=" +
+    "https://www.googleapis.com/youtube/v3/search?order=title&key=" +
     youTubeApiKey +
+    //marvel's channel id
     "&channelId=UCvC4D8onUfXzvjTOM-dBfEA" +
-    "&part=snippet,id&order=date&maxResults=" +
+    //marvel's upload playlist
+    "&playlistId=UUvC4D8onUfXzvjTOM-dBfEA&part=snippet,id&order=date&maxResults=" +
     youTubeMaxResults +
     "&q=" +
     videoHero;
-  // "&type=video" = call is not filtering data to receive only type=video;
   ////////////////////////////////
 
   // MARVEL
@@ -138,7 +142,7 @@ var getYouTubeVideo = function (foundHero) {
   //TEST THIS BELOW
   //updated to try to use marvelplay list and search term
   //CANNOT TEST as OVER QUOTA LIMIT
-  //https://www.googleapis.com/youtube/v3/search?key=AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0&playlistId=UUvC4D8onUfXzvjTOM-dBfEA&part=snippet,id&order=date&maxResults=1&q=spider-man
+  //https://www.googleapis.com/youtube/v3/search?key=AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0&playlistId=UUvC4D8onUfXzvjTOM-dBfEA&part=snippet,id&order=date&maxResults=1&q=moon
 
   //var videoRequestUrl =
   //     "https://www.googleapis.com/youtube/v3/search?key=" +
@@ -167,15 +171,15 @@ var getYouTubeVideo = function (foundHero) {
       var videoHeroSearch = data;
       console.log("videoHeroSearch - data", videoHeroSearch);
 
-      if (videoHeroSearch) {
+      if (videoHeroSearch.items.length > 0) {
         var heroVideoId = data.items[0].id.videoId;
         console.log("hero's video id", heroVideoId);
         //pass heroVideoID to video url and display video
         displayHeroVideo(heroVideoId);
-      } else if (videoHeroSearch === undefined) {
+      } else {
         marvelHeroEl.textContent = "Sorry no hero video found";
         noResultsModal(".modal-wrapper", ".modal-content", true);
-      }
+      } 
     });
   });
 };
