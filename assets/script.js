@@ -138,6 +138,42 @@ var displayHeroVideo = function (heroVideoId) {
   marvelHeroEl.appendChild(videoContainerEl);
 };
 
+// MODAL
+function noResultsModal(
+  modalWrapperSelector,
+  modalContentSelector,
+  closeModal = false
+) {
+  //select the elements
+  const modalWrapperElement = document.querySelector(modalWrapperSelector);
+  const modalContentElement = document.querySelector(modalContentSelector);
+
+  // style the modal elements
+  modalWrapperElement.classList.add("modal-wrapper");
+  modalContentElement.classList.add("modal-content");
+
+  //update modal to display
+  modalWrapperElement.style.display = "block";
+
+  //add X button to close modal
+  if (closeModal) {
+    modalContentElement.innerHTML += "<span class='close-modal'>&times;</span>";
+
+    const closeModalBtn = modalContentElement.querySelector(".close-modal");
+
+    closeModalBtn.addEventListener("click", () => {
+      modalWrapperElement.style.display = "none";
+    });
+  }
+
+  //close modal if click outside of the modal
+  modalWrapperElement.addEventListener("click", (event) => {
+    if (event.target === modalWrapperElement) {
+      modalWrapperElement.style.display = "none";
+    }
+  });
+}
+
 searchFormEl.addEventListener("submit", formSubmitHandler);
 
 // MODAL FUNCTION
