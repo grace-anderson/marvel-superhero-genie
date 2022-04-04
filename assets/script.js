@@ -93,9 +93,11 @@ var displayHero = function (foundHero, heroID) {
 
   marvelHeroEl.textContent = foundHero;
 
+
   descriptionEl.style.display = "block";
 
   displayHeroBio(heroID, foundHero);
+
   //call youTube search API
   getYouTubeVideo(foundHero);
   console.log("foundHero", foundHero);
@@ -191,6 +193,7 @@ var getYouTubeVideo = function (foundHero) {
 var displayHeroVideo = function (heroVideoId) {
   if (heroVideoId.length === 0) {
     marvelHeroEl.textContent = "No video found";
+    noResultsModal(".modal-wrapper", ".modal-content", true);
     return;
   }
   //added this as the video kept appending children when a new search started

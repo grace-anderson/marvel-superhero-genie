@@ -40,6 +40,8 @@ text-align:center;
 
     animation-name: slideIn; 
     animation-duration: 1s;
+
+    text-align: center;
 }
 
 .close-modal {
