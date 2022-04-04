@@ -85,6 +85,54 @@ var displayHero = function (foundHero, heroID) {
   console.log("foundHero", foundHero);
 };
 
+//if hero is found, pull the bio
+var displayHeroBio = function (heroID) {
+  console.log("passed display hero bio function and ID is " + heroID)
+
+  https://gateway.marvel.com:443/v1/public/characters/1009664?apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc
+
+  var requestUrl =
+    "https://gateway.marvel.com:443/v1/public/characters/" +
+    heroID +
+    "?apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc" +
+    "&ts=" +
+    ts +
+    "&hash=" +
+    passhash
+
+
+  console.log(requestUrl);
+
+  fetch(requestUrl).then(function (response) {
+    response.json().then(function (data) {
+      console.log("get bio call", data);
+      var heroDescription = data.data.results[0].description;
+      var heroImageLink = heroDescription.thumbnail.path + "." + heroDescription.thumbnail.extension
+      console.log(heroImageLink);
+
+      if (foundHero.length === 0) {
+        marvelHeroEl.textContent = "No hero found";
+        noResultsModal(".modal-wrapper", ".modal-content", true);
+        return;
+      }
+      marvelHeroEl.textContent = "Showing results for " + foundHero;
+
+
+
+      if (heroDescription.length === 0) {
+        var heroVideoId = data.items[0].id.videoId;
+        console.log("hero's video id", heroVideoId);
+        //pass heroVideoID to video url and display video
+        displayHeroVideo(heroVideoId);
+      } else if (videoHeroSearch === undefined) {
+        marvelHeroEl.textContent = "Sorry no hero video found";
+        noResultsModal(".modal-wrapper", ".modal-content", true);
+      }
+    });
+  });
+
+});
+
 //search for youTube Marvel channel videos using hero search term, return data for one video
 var getYouTubeVideo = function (foundHero) {
   var videoHero = foundHero;
