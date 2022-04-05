@@ -1,14 +1,11 @@
 # Marvel Superhero Genie
 
-TODO
-<!-- link each of our github profiles -->
-### An app by GROUP D: Jess, Andrew, Helen and Deano
+### An app by GROUP D: [Jess](https://github.com/Key16), [Andrew](https://github.com/straightbot), [Helen](https://github.com/grace-anderson), and [Deano](https://github.com/DeanoHayne)
 
 ## Purpose
-The Marvel Superhero Genie app was created collaboratively by the GROUP D team. The real-world problem the app solves is how to access top quality Marvel Superhero information with one click in one place. Without the Marvel Superhero Genie you need to search for info about your favourite superhero on Google and then find a quality video starring that superhero in YouTube. The Marvel Superhero app gets all its superhero information from the source of truth, Marvel, **TODO link to marvel website** so the best information is made available to you with one click. Even better, the search minimises typing because you only need to enter the first few letters of your superhero name to get your superhero's info and video.
+The Marvel Superhero Genie app was created collaboratively by the GROUP D team. The real-world problem the app solves is how to access top quality Marvel Superhero information with one click in one place. Without the Marvel Superhero Genie you need to search for info about your favourite superhero on Google and then find a quality video starring that superhero in YouTube. The Marvel Superhero app gets all its superhero information from the source of truth, **[Marvel](https://www.marvel.com/)** so the best information is made available to you with one click. Even better, the search minimises typing because you only need to enter the first few letters of your superhero name to get your superhero's info and video.
 
-TODO
-<!-- [Deployed coding quiz application](https://grace-anderson.github.io/code-quiz/)  -->
+[Deployed Marvel Superhero Genie](https://deanohayne.github.io/marvel-superhero-genie/)
 
 ## Project Requirements
 
@@ -22,13 +19,14 @@ The requirements guiding the initial build of the Marvel Superhero Genie app wer
 * As a Marvel fan whose search did not get any results, I see a message and an an entertaining gif so that I am informed that my search did not get  results. 
 * As a Marvel fan who has completed at least one search, I can see my previous search in the app so that I can choose to repeat my previous search if I wish.
 
-TO DO
-<!-- The application code is available on [GitHub](https://github.com/grace-anderson/code-quiz).  -->
+The application code is available on [GitHub](https://github.com/DeanoHayne/marvel-superhero-genie)
 
 ## Features
 The Marvel Superhero Genie app uses two APIs to retrieve data
 1. **The Marvel API** **TODO - Jess add more info and link**
 2. **The YouTube Data API** - The YouTube API [YouTube Data API](https://developers.google.com/youtube/v3/) is configured to use the superhero's name, returned from the Marvel API, to retrieve videos from the Marvel Entertainment YouTube channel. 
+
+We used Materialize CSS library was used to format the visual display. Browser local storage stores the most recent search to display to the user. 
 
 ## Future Work
 
@@ -45,4 +43,4 @@ Requirements planned to be implemented in the future may include:
 The gif demonstrates the Marvel Superhero Genie application's appearance and functionality
 
 TODO
-<!-- ![A user answers the coding quiz challenge questions, saving or resetting the high scores.](./assets/Coding-Quiz-Challenge.gif) -->
+<!-- ![A Marvel fan searches for their favourite superhero. The superhero's bio and image is returned, with a YouTube video staring the Marvel hero.](./assets/Coding-Quiz-Challenge.gif) -->
