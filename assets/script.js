@@ -1,13 +1,19 @@
 var searchFormEl = document.querySelector("#search-form");
 var queryEl = document.querySelector("#query-name");
+var searchBodyEl = document.querySelector("#searched-body");
 var marvelHeroEl = document.querySelector("#marvel-hero-body");
 
 var marvelBioEl = document.querySelector("#marvel-bio-body");
 var marvelImageEl = document.querySelector("#marvel-image-body");
 var youtubeBodyEl = document.querySelector("#youtube-body");
-
+var descriptionEl = document.querySelector("#description");
 //youTube API variables
-const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
+//Youtube API from Helen 
+// const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
+
+//Youtube API from Jess 
+const youTubeApiKey = "AIzaSyAcJwcGGZME6Gs--ct2mRB_KSOJ1gQmI-g";
+
 const youTubeMaxResults = "1";
 //marvel variables
 var marvelKey = "01f7cfc9bdb8d6b74631203dbb7e8ccc";
@@ -19,9 +25,15 @@ var passhash = md5(hash).toString();
 //function after submit is hit
 var formSubmitHandler = function (event) {
   event.preventDefault();
+  marvelImageEl.innerHTML = ""
+
 
   var heroName = queryEl.value.trim();
   console.log(heroName);
+
+
+  queryEl.value = ""
+
 
   if (heroName) {
     console.log("hero has been found");
@@ -77,12 +89,63 @@ var displayHero = function (foundHero, heroID) {
     noResultsModal(".modal-wrapper", ".modal-content", true);
     return;
   }
-  marvelHeroEl.textContent = "Showing results for " + foundHero;
+  searchBodyEl.textContent = "Showing results for " + foundHero;
 
-  // displayHeroBio(heroID);
+  marvelHeroEl.textContent = foundHero;
+
+
+  descriptionEl.style.display = "block";
+
+  displayHeroBio(heroID, foundHero);
+
   //call youTube search API
   getYouTubeVideo(foundHero);
   console.log("foundHero", foundHero);
+};
+
+//if hero is found, pull the bio
+var displayHeroBio = function (heroID, foundHero) {
+  console.log("passed display hero bio function and ID is " + heroID)
+
+  https://gateway.marvel.com:443/v1/public/characters/1009664?apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc
+
+  var requestUrl =
+    "https://gateway.marvel.com:443/v1/public/characters/" +
+    heroID +
+    "?apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc" +
+    "&ts=" +
+    ts +
+    "&hash=" +
+    passhash
+
+
+  console.log(requestUrl);
+
+  fetch(requestUrl).then(function (response) {
+    response.json().then(function (data) {
+      console.log("get bio call", data);
+      var heroDescription = data.data.results[0];
+      var heroDescriptionFull = data.data.results[0].description
+      var heroImagePath = heroDescription.thumbnail.path
+      console.log(heroImagePath)
+      var heroImageExtension = heroDescription.thumbnail.extension
+      var heroImageLink = heroImagePath + "." + heroImageExtension
+      console.log(heroImageLink);
+
+      console.log(heroDescriptionFull);
+      if (!heroDescriptionFull) {
+        marvelBioEl.textContent = "No bio found";
+
+      } else {
+        marvelBioEl.textContent = heroDescriptionFull;
+      }
+
+
+      marvelImageEl.innerHTML +=
+        '<img src="' + heroImageLink + '" alt=" ' + foundHero + '" style="width:220px;"><br/>'
+    });
+  });
+
 };
 
 //search for youTube Marvel channel videos using hero search term, return data for one video
@@ -117,8 +180,10 @@ var getYouTubeVideo = function (foundHero) {
         //pass heroVideoID to video url and display video
         displayHeroVideo(heroVideoId);
       } else {
-        marvelHeroEl.textContent = "Sorry no hero video found";
+        youtubeBodyEl.innerHTML = ""
+        youtubeBodyEl.textContent = "Sorry no hero video found";
         noResultsModal(".modal-wrapper", ".modal-content", true);
+
       }
     });
   });
@@ -131,6 +196,8 @@ var displayHeroVideo = function (heroVideoId) {
     noResultsModal(".modal-wrapper", ".modal-content", true);
     return;
   }
+  //added this as the video kept appending children when a new search started
+  youtubeBodyEl.innerHTML = ""
   //create url for hero video
   var heroVideoUrl = "https://www.youtube.com/embed/" + heroVideoId;
   console.log("video link for hero video: ", heroVideoUrl);
@@ -147,7 +214,7 @@ var displayHeroVideo = function (heroVideoId) {
   videoFrameEl.allowfullscreen;
 
   videoContainerEl.appendChild(videoFrameEl);
-  marvelHeroEl.appendChild(videoContainerEl);
+  youtubeBodyEl.appendChild(videoContainerEl);
 };
 
 // MODAL
