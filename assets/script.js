@@ -189,7 +189,7 @@ var displayHeroBio = function (heroID, foundHero) {
 
 
       marvelImageEl.innerHTML +=
-        '<img src="' + heroImageLink + '" alt=" ' + foundHero + '" style="width:220px;"><br/>'
+        '<img src="' + heroImageLink + '" alt=" ' + foundHero + '"style="width:100%"><br/>'
     });
   });
 
