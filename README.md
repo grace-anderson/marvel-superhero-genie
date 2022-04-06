@@ -25,7 +25,9 @@ The application code is available on [GitHub](https://github.com/DeanoHayne/marv
 
 ## Features
 The Marvel Superhero Genie app uses two APIs to retrieve data
-1. **The Marvel API** **TODO - Jess add more info and link**
+1. **The Marvel API**  - The Marvel API [Marvel Data API](https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0/) is configured to: 
+a. Search for the super hero name starting with any letter/s
+b. Return that super hero's bio and image with the returned super hero name 
 2. **The YouTube Data API** - The YouTube API [YouTube Data API](https://developers.google.com/youtube/v3/) is configured to use the superhero's name, returned from the Marvel API, to retrieve videos from the Marvel Entertainment YouTube channel. 
 
 We used Materialize CSS library was used to format the visual display. Browser local storage stores the most recent search to display to the user. 
