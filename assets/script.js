@@ -7,6 +7,8 @@ var marvelBioEl = document.querySelector("#marvel-bio-body");
 var marvelImageEl = document.querySelector("#marvel-image-body");
 var youtubeBodyEl = document.querySelector("#youtube-body");
 var descriptionEl = document.querySelector("#description");
+var searchedBodyEl = document.querySelector("#searched-body");
+
 //youTube API variables
 //Youtube API from Helen 
 // const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
@@ -22,16 +24,16 @@ var ts = new Date().getTime();
 var hash = ts + marvelOtherKey + marvelKey;
 var passhash = md5(hash).toString();
 
+var heroHistory = []
+var foundHero = ""
+var storedHeros = []
+
 //function after submit is hit
 var formSubmitHandler = function (event) {
   event.preventDefault();
   marvelImageEl.innerHTML = ""
 
-
   var heroName = queryEl.value.trim();
-  console.log(heroName);
-
-
   queryEl.value = ""
 
 
@@ -58,22 +60,23 @@ var getHeroRepos = function (hero) {
     passhash +
     "&limit=1";
 
-  console.log(requestUrl);
+
   // calling the API that searches for the hero starting with the letter entered
   fetch(requestUrl).then(function (response) {
     response.json().then(function (data) {
-      console.log(data);
+
       var heroSearch = data.data.results[0];
       console.log(heroSearch);
 
       if (heroSearch) {
-        var foundHero = heroSearch.name;
+        foundHero = heroSearch.name;
         var heroID = heroSearch.id;
         console.log(
           "the variable for the hero name " + foundHero + " is foundHero"
         );
-        console.log(heroID);
+
         displayHero(foundHero, heroID);
+        storeSearch(foundHero)
       } else if (heroSearch === undefined) {
         marvelHeroEl.textContent = "Sorry no heroes found";
         noResultsModal(".modal-wrapper", ".modal-content", true);
@@ -81,6 +84,54 @@ var getHeroRepos = function (hero) {
     });
   });
 };
+
+
+//storing history
+function storeSearch(foundHero) {
+  localStorage.setItem("heroHistory", JSON.stringify(foundHero))
+}
+
+function renderHistory() {
+  var storedHeros = localStorage.getItem("heroHistory");
+  if (storedHeros !== null) {
+    searchedBodyEl.textContent = "Your last searched hero was " + storedHeros;
+    searchedBodyEl.style.display = "block";
+    console.log("the heros in history are", storedHeros)
+  }
+}
+renderHistory();
+
+//couldn't get the autocomplete working :( 
+
+// document.addEventListener('DOMContentLoaded', function () {
+
+//   const inputField = document.querySelector('.autocomplete');
+//   var storedHeros = JSON.parse(localStorage.getItem("heroHistory"));
+//   console.log("the heros in history are", storedHeros)
+
+
+//   var entries = new Map([
+//     [storedHeros, null]
+
+//   ]);
+
+//   var obj = Object.fromEntries(entries);
+
+//   console.log(obj);
+//   // expected output: Object { foo: "bar", baz: 42 }
+
+
+//   data = {
+//     'Thor': null
+//   }
+//   console.log(data)
+
+//   M.Autocomplete.init(inputField, { data, limit: 5, minLength: 1 });
+
+// });
+
+
+
 //if hero is found
 var displayHero = function (foundHero, heroID) {
   console.log("passed display hero function and ID is " + heroID);
@@ -92,7 +143,6 @@ var displayHero = function (foundHero, heroID) {
 
   // marvelHeroEl.textContent = foundHero;
   marvelHeroEl.innerHTML = "<h2>" + foundHero + "</h2>";
-
 
   descriptionEl.style.display = "block";
 
@@ -107,8 +157,6 @@ var displayHero = function (foundHero, heroID) {
 var displayHeroBio = function (heroID, foundHero) {
   console.log("passed display hero bio function and ID is " + heroID)
 
-  https://gateway.marvel.com:443/v1/public/characters/1009664?apikey=01f7cfc9bdb8d6b74631203dbb7e8ccc
-
   var requestUrl =
     "https://gateway.marvel.com:443/v1/public/characters/" +
     heroID +
@@ -119,20 +167,19 @@ var displayHeroBio = function (heroID, foundHero) {
     passhash
 
 
-  console.log(requestUrl);
 
   fetch(requestUrl).then(function (response) {
     response.json().then(function (data) {
-      console.log("get bio call", data);
+
       var heroDescription = data.data.results[0];
       var heroDescriptionFull = data.data.results[0].description
       var heroImagePath = heroDescription.thumbnail.path
-      console.log(heroImagePath)
+
       var heroImageExtension = heroDescription.thumbnail.extension
       var heroImageLink = heroImagePath + "." + heroImageExtension
       console.log(heroImageLink);
 
-      console.log(heroDescriptionFull);
+
       if (!heroDescriptionFull) {
         marvelBioEl.textContent = "No bio found";
 
@@ -174,7 +221,7 @@ var getYouTubeVideo = function (foundHero) {
       var videoHeroSearch = data;
       console.log("videoHeroSearch - data", videoHeroSearch);
 
-      if (videoHeroSearch.items.length > 0) {
+      if (videoHeroSearch.items.length !== undefined) {
         var heroVideoId = data.items[0].id.videoId;
         console.log("hero's video id", heroVideoId);
         //pass heroVideoID to video url and display video
