@@ -9,10 +9,10 @@ var youtubeBodyEl = document.querySelector("#youtube-body");
 var descriptionEl = document.querySelector("#description");
 //youTube API variables
 //Youtube API from Helen 
-const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
+// const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
 
 //Youtube API from Jess 
-// const youTubeApiKey = "AIzaSyAcJwcGGZME6Gs--ct2mRB_KSOJ1gQmI-g";
+const youTubeApiKey = "AIzaSyAcJwcGGZME6Gs--ct2mRB_KSOJ1gQmI-g";
 
 const youTubeMaxResults = "1";
 //marvel variables
@@ -90,7 +90,8 @@ var displayHero = function (foundHero, heroID) {
     return;
   }
 
-  marvelHeroEl.textContent = foundHero;
+  // marvelHeroEl.textContent = foundHero;
+  marvelHeroEl.innerHTML = "<h2>" + foundHero + "</h2>";
 
 
   descriptionEl.style.display = "block";
