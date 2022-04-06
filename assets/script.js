@@ -22,6 +22,30 @@ var ts = new Date().getTime();
 var hash = ts + marvelOtherKey + marvelKey;
 var passhash = md5(hash).toString();
 
+
+
+
+function renderSearch(foundHero) {
+  // Clear todoList element and update todoCountSpan
+  todoList.innerHTML = "";
+  todoCountSpan.textContent = Search.length;
+
+  // Render a new li for each todo
+  for (var i = 0; i < todos.length; i++) {
+    var todo = todos[i];
+
+    var li = document.createElement("li");
+    li.textContent = search;
+    li.setAttribute("data-index", i);
+
+    var button = document.createElement("button");
+    button.textContent = "Complete ✔️";
+
+    li.appendChild(button);
+    todoList.appendChild(li);
+  }
+}
+
 //function after submit is hit
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -74,6 +98,7 @@ var getHeroRepos = function (hero) {
         );
         console.log(heroID);
         displayHero(foundHero, heroID);
+        storeSearch(foundHero);
       } else if (heroSearch === undefined) {
         marvelHeroEl.textContent = "Sorry no heroes found";
         noResultsModal(".modal-wrapper", ".modal-content", true);
@@ -81,6 +106,21 @@ var getHeroRepos = function (hero) {
     });
   });
 };
+
+function storeSearch(foundHero) {
+  localStorage.setItem("search", foundHero);
+  console.log("this is foundHero", foundHero);
+}
+var storedSearch = localStorage.getItem("search");
+console.log(storedSearch);
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.autocomplete');
+  var instances = M.Autocomplete.init(elems, options);
+console.log("instances", instances)
+instance.open(foundHero);
+});
+
+
 //if hero is found
 var displayHero = function (foundHero, heroID) {
   console.log("passed display hero function and ID is " + heroID);
