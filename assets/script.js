@@ -2,6 +2,7 @@ var searchFormEl = document.querySelector("#search-form");
 var queryEl = document.querySelector("#query-name");
 var searchBodyEl = document.querySelector("#searched-body");
 var marvelHeroEl = document.querySelector("#marvel-hero-body");
+var search = document.querySelector("search")
 
 var marvelBioEl = document.querySelector("#marvel-bio-body");
 var marvelImageEl = document.querySelector("#marvel-image-body");
@@ -10,9 +11,10 @@ var descriptionEl = document.querySelector("#description");
 //youTube API variables
 //Youtube API from Helen 
 // const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
+// youtube api key = AIzaSyDvCi3sUp1X5r9Qe-tfP_GnxCXg9YtplJ4
 
 //Youtube API from Jess 
-const youTubeApiKey = "AIzaSyAcJwcGGZME6Gs--ct2mRB_KSOJ1gQmI-g";
+const youTubeApiKey = "AIzaSyDvCi3sUp1X5r9Qe-tfP_GnxCXg9YtplJ4";
 
 const youTubeMaxResults = "1";
 //marvel variables
@@ -23,28 +25,6 @@ var hash = ts + marvelOtherKey + marvelKey;
 var passhash = md5(hash).toString();
 
 
-
-
-function renderSearch(foundHero) {
-  // Clear todoList element and update todoCountSpan
-  todoList.innerHTML = "";
-  todoCountSpan.textContent = Search.length;
-
-  // Render a new li for each todo
-  for (var i = 0; i < todos.length; i++) {
-    var todo = todos[i];
-
-    var li = document.createElement("li");
-    li.textContent = search;
-    li.setAttribute("data-index", i);
-
-    var button = document.createElement("button");
-    button.textContent = "Complete ✔️";
-
-    li.appendChild(button);
-    todoList.appendChild(li);
-  }
-}
 
 //function after submit is hit
 var formSubmitHandler = function (event) {
@@ -115,13 +95,12 @@ var storedSearch = localStorage.getItem("search");
 console.log(storedSearch);
 document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.autocomplete');
-  var instances = M.Autocomplete.init(elems, options);
-console.log("instances", instances)
-instance.open(foundHero);
+
+ 
 });
 
-
 //if hero is found
+
 var displayHero = function (foundHero, heroID) {
   console.log("passed display hero function and ID is " + heroID);
   if (foundHero.length === 0) {
