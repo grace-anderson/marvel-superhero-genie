@@ -10,10 +10,10 @@ var descriptionEl = document.querySelector("#description");
 var searchedBodyEl = document.querySelector("#searched-body");
 
 //youTube API variables
-//Youtube API from Helen 
+//Youtube API from Helen
 // const youTubeApiKey = "AIzaSyAfUF4iIR3SGaR4Zp32vLIHhtUBJH2nPR0";
 
-//Youtube API from Jess 
+//Youtube API from Jess
 const youTubeApiKey = "AIzaSyAcJwcGGZME6Gs--ct2mRB_KSOJ1gQmI-g";
 
 const youTubeMaxResults = "1";
@@ -24,18 +24,17 @@ var ts = new Date().getTime();
 var hash = ts + marvelOtherKey + marvelKey;
 var passhash = md5(hash).toString();
 
-var heroHistory = []
-var foundHero = ""
-var storedHeros = []
+var heroHistory = [];
+var foundHero = "";
+var storedHeros = [];
 
 //function after submit is hit
 var formSubmitHandler = function (event) {
   event.preventDefault();
-  marvelImageEl.innerHTML = ""
+  marvelImageEl.innerHTML = "";
 
   var heroName = queryEl.value.trim();
-  queryEl.value = ""
-
+  queryEl.value = "";
 
   if (heroName) {
     console.log("hero has been found");
@@ -60,11 +59,9 @@ var getHeroRepos = function (hero) {
     passhash +
     "&limit=1";
 
-
   // calling the API that searches for the hero starting with the letter entered
   fetch(requestUrl).then(function (response) {
     response.json().then(function (data) {
-
       var heroSearch = data.data.results[0];
       console.log(heroSearch);
 
@@ -76,7 +73,7 @@ var getHeroRepos = function (hero) {
         );
 
         displayHero(foundHero, heroID);
-        storeSearch(foundHero)
+        storeSearch(foundHero);
       } else if (heroSearch === undefined) {
         marvelHeroEl.textContent = "Sorry no heroes found";
         noResultsModal(".modal-wrapper", ".modal-content", true);
@@ -85,10 +82,9 @@ var getHeroRepos = function (hero) {
   });
 };
 
-
 //storing history
 function storeSearch(foundHero) {
-  localStorage.setItem("heroHistory", JSON.stringify(foundHero))
+  localStorage.setItem("heroHistory", JSON.stringify(foundHero));
 }
 
 function renderHistory() {
@@ -96,41 +92,26 @@ function renderHistory() {
   if (storedHeros !== null) {
     searchedBodyEl.textContent = "Your last searched hero was " + storedHeros;
     searchedBodyEl.style.display = "block";
-    console.log("the heros in history are", storedHeros)
+    console.log("the heros in history are", storedHeros);
   }
 }
 renderHistory();
 
-//couldn't get the autocomplete working :( 
+document.addEventListener("DOMContentLoaded", function () {
+  const inputField = document.querySelector(".autocomplete");
+  var storedHeros = JSON.parse(localStorage.getItem("heroHistory"));
+  console.log("the heros in history are", storedHeros);
 
-// document.addEventListener('DOMContentLoaded', function () {
+  var entries = new Map([[storedHeros, null]]); 
+  console.log("entries", entries)
 
-//   const inputField = document.querySelector('.autocomplete');
-//   var storedHeros = JSON.parse(localStorage.getItem("heroHistory"));
-//   console.log("the heros in history are", storedHeros)
+  var data = Object.fromEntries(entries);
 
+  console.log(data);
 
-//   var entries = new Map([
-//     [storedHeros, null]
-
-//   ]);
-
-//   var obj = Object.fromEntries(entries);
-
-//   console.log(obj);
-//   // expected output: Object { foo: "bar", baz: 42 }
-
-
-//   data = {
-//     'Thor': null
-//   }
-//   console.log(data)
-
-//   M.Autocomplete.init(inputField, { data, limit: 5, minLength: 1 });
-
-// });
-
-
+  M.Autocomplete.init(inputField, { data, limit: 5, minLength: 1 });
+  // M.Autocomplete.init(inputField, obj );
+});
 
 //if hero is found
 var displayHero = function (foundHero, heroID) {
@@ -155,7 +136,7 @@ var displayHero = function (foundHero, heroID) {
 
 //if hero is found, pull the bio
 var displayHeroBio = function (heroID, foundHero) {
-  console.log("passed display hero bio function and ID is " + heroID)
+  console.log("passed display hero bio function and ID is " + heroID);
 
   var requestUrl =
     "https://gateway.marvel.com:443/v1/public/characters/" +
@@ -164,35 +145,32 @@ var displayHeroBio = function (heroID, foundHero) {
     "&ts=" +
     ts +
     "&hash=" +
-    passhash
-
-
+    passhash;
 
   fetch(requestUrl).then(function (response) {
     response.json().then(function (data) {
-
       var heroDescription = data.data.results[0];
-      var heroDescriptionFull = data.data.results[0].description
-      var heroImagePath = heroDescription.thumbnail.path
+      var heroDescriptionFull = data.data.results[0].description;
+      var heroImagePath = heroDescription.thumbnail.path;
 
-      var heroImageExtension = heroDescription.thumbnail.extension
-      var heroImageLink = heroImagePath + "." + heroImageExtension
+      var heroImageExtension = heroDescription.thumbnail.extension;
+      var heroImageLink = heroImagePath + "." + heroImageExtension;
       console.log(heroImageLink);
-
 
       if (!heroDescriptionFull) {
         marvelBioEl.textContent = "No bio found";
-
       } else {
         marvelBioEl.textContent = heroDescriptionFull;
       }
 
-
       marvelImageEl.innerHTML +=
-        '<img src="' + heroImageLink + '" alt=" ' + foundHero + '"style="width:100%"><br/>'
+        '<img src="' +
+        heroImageLink +
+        '" alt=" ' +
+        foundHero +
+        '"style="width:100%"><br/>';
     });
   });
-
 };
 
 //search for youTube Marvel channel videos using hero search term, return data for one video
@@ -227,10 +205,9 @@ var getYouTubeVideo = function (foundHero) {
         //pass heroVideoID to video url and display video
         displayHeroVideo(heroVideoId);
       } else {
-        youtubeBodyEl.innerHTML = ""
+        youtubeBodyEl.innerHTML = "";
         youtubeBodyEl.textContent = "Sorry no hero video found";
         noResultsModal(".modal-wrapper", ".modal-content", true);
-
       }
     });
   });
@@ -244,7 +221,7 @@ var displayHeroVideo = function (heroVideoId) {
     return;
   }
   //added this as the video kept appending children when a new search started
-  youtubeBodyEl.innerHTML = ""
+  youtubeBodyEl.innerHTML = "";
   //create url for hero video
   var heroVideoUrl = "https://www.youtube.com/embed/" + heroVideoId;
   console.log("video link for hero video: ", heroVideoUrl);
