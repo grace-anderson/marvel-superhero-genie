@@ -87,16 +87,6 @@ function storeSearch(foundHero) {
   localStorage.setItem("heroHistory", JSON.stringify(foundHero));
 }
 
-function renderHistory() {
-  var storedHeros = localStorage.getItem("heroHistory");
-  if (storedHeros !== null) {
-    searchedBodyEl.textContent = "Your last searched hero was " + storedHeros;
-    searchedBodyEl.style.display = "block";
-    console.log("the heros in history are", storedHeros);
-  }
-}
-renderHistory();
-
 document.addEventListener("DOMContentLoaded", function () {
   const inputField = document.querySelector(".autocomplete");
   var storedHeros = JSON.parse(localStorage.getItem("heroHistory"));
