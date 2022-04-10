@@ -23,7 +23,7 @@ The requirements guiding this initial build of the Marvel Superhero Genie app we
 
 The application code is available on [GitHub](https://github.com/DeanoHayne/marvel-superhero-genie)
 
-## Features
+## Features and Technology
 The Marvel Superhero Genie app uses two APIs to retrieve data
 1. **The Marvel API**  - The Marvel API [Marvel Data API](https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0/) is configured to: 
 a. Search for the super hero name starting with any letter/s
