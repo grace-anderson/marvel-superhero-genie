@@ -32,6 +32,8 @@ b. Return that super hero's bio and image with the returned super hero name
 
 We used Materialize CSS library was used to format the visual display. Browser local storage stores the most recent search to display to the user. 
 
+The app was coded using HTML5, CSS3 and JavaScript.
+
 ## Future Work
 
 User stories planned for the future may include: 
