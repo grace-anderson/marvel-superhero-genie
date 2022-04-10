@@ -48,4 +48,4 @@ User stories planned for the future may include:
 
 The gif demonstrates the Marvel Superhero Genie application's appearance and functionality
 
-![A Marvel fan searches for their favourite superhero. The superhero's bio and image is returned, with an official Marvel channel YouTube video staring the Marvel hero. The user can play and pause the video. In the event of leaving or refreshing the page, the previous search is notified](./assets/Marvel-Superhero-Genie.gif) 
+![A Marvel fan searches for their favourite superhero. The superhero's bio and image is returned, with an official Marvel channel YouTube video staring the Marvel hero. The user can play and pause the video. In the event of leaving or refreshing the page, the previous search is retrieved in the search autocomplete](./assets/Marvel-Superhero-Genie.gif) 
