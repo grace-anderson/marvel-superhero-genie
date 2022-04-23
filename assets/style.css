@@ -1,4 +1,8 @@
 /* materialise h1 format*/
+body {
+    background-color: red;
+}
+
 h1{
 text-align:center;
 } 
