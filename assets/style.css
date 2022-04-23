@@ -1,8 +1,8 @@
-/* materialise h1 format*/
 body {
-    background-color: red;
+    background-image:url("https://static2.cbrimages.com/wordpress/wp-content/uploads/2019/11/Marvel-Univere-Header-Image-Cropped.jpg")
 }
 
+/* materialise h1 format*/
 h1{
 text-align:center;
 } 
@@ -11,80 +11,14 @@ form{
 text-align:center;
 }
 
-/* MODAL CSS */
-.open-modal {
-    cursor: pointer;
+/* modal */
+
+.custom-h5 {
+    padding-bottom: 2rem;
 }
 
-.modal-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
+.responsive {
+    max-width: 100%;
+    height: auto;
+  }
 
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.6);
-
-    z-index: 1;
-    display: none;
-
-    animation-name: fadeIn; 
-    animation-duration: 1s;
-}
-
-.modal-content{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    background-color: #fff;
-    border-radius: 0.6rem;
-    padding: 2rem;
-
-    animation-name: slideIn; 
-    animation-duration: 1s;
-
-    text-align: center;
-}
-
-.close-modal {
-    position: absolute;
-    right: 0.4rem;
-    top: 1rem;
-    line-height: 0;
-    color: rgb(148, 147, 147);
-    font-size: 28px;
-    font-weight: bolder;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.close-modal:hover{
- color: #000;
- cursor: pointer;   
-}
-
-body {
-    background-image:url("https://static2.cbrimages.com/wordpress/wp-content/uploads/2019/11/Marvel-Univere-Header-Image-Cropped.jpg")
-}
-
-/* modal animations */
-@keyframes slideIn {
-    from {
-        top: 60%;
-        opacity: 0;
-    }
-    to {
-        top: 50%;
-        opacity: 1;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}

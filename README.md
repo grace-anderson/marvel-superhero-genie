@@ -62,6 +62,10 @@ The gif demonstrates the Marvel Superhero Genie application's appearance and fun
 
 ![Bio, image and video retrieved by searching for "aveng" (first letters of "avengers")](./assets/avengers-search.png)
 
+### Mock up 3: Amusing modal when no hero found
+
+![Amusing modal appears when search retrieves no results. Close modal by clicking "Close" or by clicking outside the modal)](./assets/marvel-superhero-genie-modal.gif)
+
 ## Contact
 
 #### Helen G Anderson
